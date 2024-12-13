@@ -14,6 +14,7 @@ public class VendingMachineController {
 
     private final InputView inputView;
     private final OutputView outputView;
+    private int inputAmount;
 
     public VendingMachineController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
@@ -35,13 +36,18 @@ public class VendingMachineController {
         Items items = tryReadItems();
 
         //투입 금액 입력
-        int amount = tryReadInputAmount();
+        inputAmount = tryReadInputAmount();
 
-        //투입 금액 출력
-        outputView.printInputAmount(amount);
+        // 남은 금액이 상품의 최저 가격보다 적거나, 모든 상품이 소진된 경우 바로 잔돈을 돌려준다.
+        // 남은 금액이 상품의 최저 가격보다 낮지 않을 경우, 모든 상품이 소진되지 않은 경우 계속 실행
+        while (!items.isAllItemOutOfStock() && !items.isMinPriceItemMore(inputAmount)) {
+            outputView.printInputAmount(inputAmount);
 
-        //구매할 상품 입력
-        Item item = tryPurchaseItem(items);
+            Item purchaseItem = tryPurchaseItem(items);
+
+            inputAmount = items.purchase(purchaseItem, inputAmount);
+        }
+
     }
 
     private Item tryPurchaseItem(Items items) {
@@ -54,7 +60,7 @@ public class VendingMachineController {
 
     private int tryReadInputAmount() {
         return requestRead(() -> {
-            int inputAmount = inputView.readInputAmount();
+            inputAmount = inputView.readInputAmount();
 
             if (inputAmount < 0) {
                 throw new IllegalArgumentException("투입 금액은 0원 이상이어야 합니다.");
