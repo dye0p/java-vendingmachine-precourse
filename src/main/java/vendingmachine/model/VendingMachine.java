@@ -21,4 +21,8 @@ public class VendingMachine {
     public Map<Integer, Integer> creatRandomCoin() {
         return RandomCoinGenerator.createRandomCoins(amount);
     }
+
+    public int getAmount() {
+        return amount;
+    }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+import vendingmachine.model.Coins;
 import vendingmachine.model.Item;
 import vendingmachine.model.Items;
 import vendingmachine.model.VendingMachine;
@@ -29,6 +30,8 @@ public class VendingMachineController {
         //동전 생성
         Map<Integer, Integer> randomCoins = vendingMachine.creatRandomCoin();
 
+        Coins coins = new Coins(randomCoins);
+
         //자판기가 보유한 동전 출력
         outputView.printMachineCoins(randomCoins);
 
@@ -48,6 +51,10 @@ public class VendingMachineController {
             inputAmount = items.purchase(purchaseItem, inputAmount);
         }
 
+        outputView.printInputAmount(inputAmount);
+
+        //잔돈 반환
+        Map<Integer, Integer> returnCoin = coins.returnChange(inputAmount, vendingMachine.getAmount());
     }
 
     private Item tryPurchaseItem(Items items) {
