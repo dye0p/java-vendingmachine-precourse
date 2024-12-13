@@ -1,7 +1,11 @@
 package vendingmachine.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+import vendingmachine.model.Item;
+import vendingmachine.model.Items;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -27,6 +31,30 @@ public class VendingMachineController {
         //자판기가 보유한 동전 출력
         outputView.printMachineCoins(randomCoins);
 
+        //상품명, 가격, 수량을 입력
+        Items items = tryReadItems();
+
+    }
+
+    private Items tryReadItems() {
+        return requestRead(() -> {
+            List<String> readItems = inputView.readeItem();
+
+            List<Item> items = new ArrayList<>();
+            for (String readItem : readItems) {
+                String[] split = readItem.split(",");
+
+                String name = split[0];
+                int price = Integer.parseInt(split[1]);
+                int quantity = Integer.parseInt(split[2]);
+
+                Item item = new Item(name, price, quantity);
+
+                items.add(item);
+            }
+
+            return new Items(items);
+        });
     }
 
     private VendingMachine tryReadAmount() {
