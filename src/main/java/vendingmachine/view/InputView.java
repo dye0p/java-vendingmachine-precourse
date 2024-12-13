@@ -23,7 +23,7 @@ public class InputView {
         return InputConverter.convertItems(inputItems);
     }
 
-    private int readInputAmount() {
+    public int readInputAmount() {
         System.out.println(NEXT_LINE + "투입 금액을 입력해 주세요.");
 
         String inputAmount = Console.readLine();
