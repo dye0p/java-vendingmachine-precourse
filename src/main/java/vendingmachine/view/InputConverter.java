@@ -12,18 +12,22 @@ public class InputConverter {
         return parseCoin(inputCoin);
     }
 
+    public static List<String> convertItems(String inputItems) {
+
+        //콤마로 구분하고, 세미콜론으로 상품을 구별
+        return splitItems(inputItems);
+    }
+
+    public static int convertAmount(String inputAmount) {
+        return parseCoin(inputAmount);
+    }
+
     private static int parseCoin(String inputCoin) {
         try {
             return Integer.parseInt(inputCoin.trim());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_AMOUNT.getErrorMessage());
         }
-    }
-
-    public static List<String> convertItems(String inputItems) {
-
-        //콤마로 구분하고, 세미콜론으로 상품을 구별
-        return splitItems(inputItems);
     }
 
     private static List<String> splitItems(String inputItems) {

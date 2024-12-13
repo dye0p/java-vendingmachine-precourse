@@ -34,6 +34,21 @@ public class VendingMachineController {
         //상품명, 가격, 수량을 입력
         Items items = tryReadItems();
 
+        //투입 금액 입력
+        int amount = tryReadInputAmount();
+
+    }
+
+    private int tryReadInputAmount() {
+        return requestRead(() -> {
+            int inputAmount = inputView.readAmount();
+
+            if (inputAmount < 0) {
+                throw new IllegalArgumentException("투입 금액은 0원 이상이어야 합니다.");
+            }
+
+            return inputAmount;
+        });
     }
 
     private Items tryReadItems() {
