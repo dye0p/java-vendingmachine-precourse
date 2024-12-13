@@ -55,6 +55,8 @@ public class VendingMachineController {
 
         //잔돈 반환
         Map<Integer, Integer> returnCoin = coins.returnChange(inputAmount, vendingMachine.getAmount());
+
+        outputView.printReturnCoin(returnCoin);
     }
 
     private Item tryPurchaseItem(Items items) {

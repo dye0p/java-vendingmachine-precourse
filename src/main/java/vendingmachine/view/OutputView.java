@@ -21,4 +21,11 @@ public class OutputView {
         String format = String.format("투입 금액: %d원", amount);
         System.out.println(NEXT_LINE + format);
     }
+
+    public void printReturnCoin(Map<Integer, Integer> returnCoin) {
+        System.out.println("잔돈");
+
+        String s = OutputFormatter.formatMachineCoins(returnCoin);
+        System.out.println(s);
+    }
 }
