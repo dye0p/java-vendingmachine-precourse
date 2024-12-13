@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import java.util.Map;
 import java.util.function.Supplier;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.view.InputView;
@@ -19,6 +20,10 @@ public class VendingMachineController {
 
         //보유 금액 입력
         VendingMachine vendingMachine = tryReadAmount();
+
+        //동전 생성
+        Map<Integer, Integer> randomCoins = vendingMachine.creatRandomCoin();
+
     }
 
     private VendingMachine tryReadAmount() {

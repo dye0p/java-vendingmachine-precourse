@@ -1,5 +1,6 @@
 package vendingmachine.model;
 
+import java.util.Map;
 import vendingmachine.exception.ErrorMessage;
 
 public class VendingMachine {
@@ -15,5 +16,9 @@ public class VendingMachine {
         if (amount % 10 != 0) {
             throw new IllegalArgumentException(ErrorMessage.DIVIDE_AMOUNT.getErrorMessage());
         }
+    }
+
+    public Map<Integer, Integer> creatRandomCoin() {
+        return RandomCoinGenerator.createRandomCoins(amount);
     }
 }
