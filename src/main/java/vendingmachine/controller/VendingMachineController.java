@@ -24,6 +24,9 @@ public class VendingMachineController {
         //동전 생성
         Map<Integer, Integer> randomCoins = vendingMachine.creatRandomCoin();
 
+        //자판기가 보유한 동전 출력
+        outputView.printMachineCoins(randomCoins);
+
     }
 
     private VendingMachine tryReadAmount() {
