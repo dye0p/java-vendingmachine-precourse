@@ -16,4 +16,9 @@ public class OutputView {
         String coinResult = OutputFormatter.formatMachineCoins(randomCoins);
         System.out.println(coinResult);
     }
+
+    public void printInputAmount(int amount) {
+        String format = String.format("투입 금액: %d원", amount);
+        System.out.print(NEXT_LINE + format);
+    }
 }

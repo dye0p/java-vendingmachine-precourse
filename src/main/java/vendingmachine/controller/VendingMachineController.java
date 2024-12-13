@@ -37,6 +37,9 @@ public class VendingMachineController {
         //투입 금액 입력
         int amount = tryReadInputAmount();
 
+        //투입 금액 출력
+        outputView.printInputAmount(amount);
+
     }
 
     private int tryReadInputAmount() {
