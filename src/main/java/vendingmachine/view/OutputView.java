@@ -19,6 +19,6 @@ public class OutputView {
 
     public void printInputAmount(int amount) {
         String format = String.format("투입 금액: %d원", amount);
-        System.out.print(NEXT_LINE + format);
+        System.out.println(NEXT_LINE + format);
     }
 }

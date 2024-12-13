@@ -41,7 +41,14 @@ public class VendingMachineController {
         outputView.printInputAmount(amount);
 
         //구매할 상품 입력
+        Item item = tryPurchaseItem(items);
+    }
 
+    private Item tryPurchaseItem(Items items) {
+        return requestRead(() -> {
+            String itemName = inputView.readPurchaseItem();
+            return items.findByName(itemName);
+        });
     }
 
 
